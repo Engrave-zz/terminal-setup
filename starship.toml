@@ -92,5 +92,5 @@ disabled = true
 [aws]
 format = 'on [$symbol$profile]($style) '
 style = "bold yellow"
-symbol = "☁️"
+symbol = "☁️" 
 force_display = true
