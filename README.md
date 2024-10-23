@@ -82,214 +82,214 @@ Once the above steps are complete, you should be able to open Windows Terminal, 
      brew install starship
      ```
     Create file `~/.config/starship.toml` and copy the following:
-    ```toml
-    # ~/.config/starship.toml
+      ```toml
+      # ~/.config/starship.toml
 
-    # Inserts a blank line between shell prompts
-    add_newline = true
+      # Inserts a blank line between shell prompts
+      add_newline = true
 
-    # Change the default prompt formatß
-    # format = """\
-    # [╭╴](238)$env_var\
-    # $all[╰─](238)$character"""
+      # Change the default prompt formatß
+      # format = """\
+      # [╭╴](238)$env_var\
+      # $all[╰─](238)$character"""
 
-    # Change the default prompt characters
-    [character]
-    success_symbol = ""
-    error_symbol = ""
+      # Change the default prompt characters
+      [character]
+      success_symbol = ""
+      error_symbol = ""
 
-    # Shows an icon that should be included by zshrc script based on the distribution or os
-    [env_var.STARSHIP_DISTRO]
-    format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
-    variable = "STARSHIP_DISTRO"
-    disabled = false
+      # Shows an icon that should be included by zshrc script based on the distribution or os
+      [env_var.STARSHIP_DISTRO]
+      format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
+      variable = "STARSHIP_DISTRO"
+      disabled = false
 
-    # Shows the username
-    [username]
-    style_user = "white bold"
-    style_root = "black bold"
-    format = "[$user]($style) "
-    disabled = false  # disable in powershell
-    show_always = true
+      # Shows the username
+      [username]
+      style_user = "white bold"
+      style_root = "black bold"
+      format = "[$user]($style) "
+      disabled = false  # disable in powershell
+      show_always = true
 
-    [directory]
-    truncation_length = 3
-    truncation_symbol = "…/"
-    home_symbol = " ~"
-    read_only_style = "197"
-    read_only = "  "
-    format = "at [$path]($style)[$read_only]($read_only_style) "
+      [directory]
+      truncation_length = 3
+      truncation_symbol = "…/"
+      home_symbol = " ~"
+      read_only_style = "197"
+      read_only = "  "
+      format = "at [$path]($style)[$read_only]($read_only_style) "
 
-    [git_branch]
-    symbol = "󰊢 "
-    format = "on [$symbol$branch]($style) "
-    truncation_length = 20
-    truncation_symbol = "…/"
-    style = "bold green"
+      [git_branch]
+      symbol = "󰊢 "
+      format = "on [$symbol$branch]($style) "
+      truncation_length = 20
+      truncation_symbol = "…/"
+      style = "bold green"
 
-    [git_status]
-    format = '[\($all_status$ahead_behind\)]($style) '
-    style = "bold green"
-    conflicted = "🏳"
-    up_to_date = " "
-    untracked = " "
-    ahead = "⇡${count}"
-    diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-    behind = "⇣${count}"
-    stashed = " "
-    modified = " "
-    staged = '[++\($count\)](green)'
-    renamed = "󰖷 "
-    deleted = " "
+      [git_status]
+      format = '[\($all_status$ahead_behind\)]($style) '
+      style = "bold green"
+      conflicted = "🏳"
+      up_to_date = " "
+      untracked = " "
+      ahead = "⇡${count}"
+      diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+      behind = "⇣${count}"
+      stashed = " "
+      modified = " "
+      staged = '[++\($count\)](green)'
+      renamed = "󰖷 "
+      deleted = " "
 
-    [terraform]
-    format = "via [󱁢 terraform $version]($style) 󰑃 [$workspace]($style) "
+      [terraform]
+      format = "via [󱁢 terraform $version]($style) 󰑃 [$workspace]($style) "
 
-    [vagrant]
-    format = "via [ vagrant $version]($style) "
+      [vagrant]
+      format = "via [ vagrant $version]($style) "
 
-    [docker_context]
-    format = "via [ $context](bold blue) "
+      [docker_context]
+      format = "via [ $context](bold blue) "
 
-    [helm]
-    format = "via [󱃾 $version](bold purple) "
+      [helm]
+      format = "via [󱃾 $version](bold purple) "
 
-    [python]
-    symbol = " "
-    python_binary = "python3"
+      [python]
+      symbol = " "
+      python_binary = "python3"
 
-    [nodejs]
-    format = "via [󰎙 $version](bold green) "
-    disabled = true
+      [nodejs]
+      format = "via [󰎙 $version](bold green) "
+      disabled = true
 
-    [ruby]
-    format = "via [ $version]($style) "
+      [ruby]
+      format = "via [ $version]($style) "
 
-    [kubernetes]
-    format = 'on [󱃾 $context\($namespace\)](bold purple) '
-    disabled = false
-    [kubernetes.context_aliases]
-    ".*:.*:cluster.(?P<var_cluster>[\\w-]+)" = "$var_cluster"
+      [kubernetes]
+      format = 'on [󱃾 $context\($namespace\)](bold purple) '
+      disabled = false
+      [kubernetes.context_aliases]
+      ".*:.*:cluster.(?P<var_cluster>[\\w-]+)" = "$var_cluster"
 
-    [gcloud]
-    disabled = true
+      [gcloud]
+      disabled = true
 
-    [aws]
-    format = 'on [$symbol$profile]($style) '
-    style = "bold yellow"
-    symbol = "☁️" 
-    force_display = true
-    ```
+      [aws]
+      format = 'on [$symbol$profile]($style) '
+      style = "bold yellow"
+      symbol = "☁️" 
+      force_display = true
+      ```
    - **Fish Shell (optional, mainly for linux)**
      1. Create a new file `/usr/local/bin/fishlogin`  
         Make it executable with:  
         `sudo chmod a+rx /usr/local/bin/fishlogin`
      2. Add the following content to the `fishlogin` file:
-        ```bash
-        #!/bin/bash -l
-        exec -l fish "$@"
-        ```
+         ```bash
+         #!/bin/bash -l
+         exec -l fish "$@"
+         ```
      3. Run the following command to add it to the list of shells:
-        ```bash
-        echo /usr/local/bin/fishlogin | sudo tee -a /etc/shells
-        ```
+         ```bash
+         echo /usr/local/bin/fishlogin | sudo tee -a /etc/shells
+         ```
      4. Set Fish as your default shell:
-        ```bash
-        chsh -s /usr/local/bin/fishlogin
-        ```
+         ```bash
+         chsh -s /usr/local/bin/fishlogin
+         ```
      5. Verify that the new terminal starts with Fish.
 
    - **Add the following to your `~/.profile`, be sure to replace <username> with your username**
-    ```bash
-    export PATH="/Users/<username>/go/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+      ```bash
+      export PATH="/Users/<username>/go/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+      eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    if [ -f ~/.bashrc ];
-    then 
-        .  ~/.bashrc; 
-    fi
-    ```
+      if [ -f ~/.bashrc ];
+      then 
+         .  ~/.bashrc; 
+      fi
+      ```
 
    - **Add the following to `~/.bashrc`**
-    ```bash
-    eval "$(starship init bash)"
-    cd ~/OneDrive/projects/<project>
-    ```
+      ```bash
+      eval "$(starship init bash)"
+      cd ~/OneDrive/projects/<project>
+      ```
 
    - **Create `~/.config/fish/config.fish`**  
      Paste the following code and save:
-     ```bash
-        starship init fish | source
-        function fish_greeting
-        end
-        function gp
-        git pull && git add ./ && git commit -m "$argv" && git push
-        end
-        alias k="kubectl"
-        egrep "^export " ~/.profile | while read e
-            set var (echo $e | sed -E "s/^export ([A-Z_]+)=(.*)\$/\1/")
-            set value (echo $e | sed -E "s/^export ([A-Z_]+)=(.*)\$/\2/")
+      ```bash
+         starship init fish | source
+         function fish_greeting
+         end
+         function gp
+         git pull && git add ./ && git commit -m "$argv" && git push
+         end
+         alias k="kubectl"
+         egrep "^export " ~/.profile | while read e
+               set var (echo $e | sed -E "s/^export ([A-Z_]+)=(.*)\$/\1/")
+               set value (echo $e | sed -E "s/^export ([A-Z_]+)=(.*)\$/\2/")
 
-            # remove surrounding quotes if existing
-            set value (echo $value | sed -E "s/^\"(.*)\"\$/\1/")
+               # remove surrounding quotes if existing
+               set value (echo $value | sed -E "s/^\"(.*)\"\$/\1/")
 
-            if test $var = "PATH"
-                # replace ":" by spaces. this is how PATH looks for Fish
-                set value (echo $value | sed -E "s/:/ /g")
+               if test $var = "PATH"
+                  # replace ":" by spaces. this is how PATH looks for Fish
+                  set value (echo $value | sed -E "s/:/ /g")
 
-                # use eval because we need to expand the value
-                eval set -xg $var $value
+                  # use eval because we need to expand the value
+                  eval set -xg $var $value
 
-                continue
-            end
+                  continue
+               end
 
-            # evaluate variables. we can use eval because we most likely just used "$var"
-            set value (eval echo $value)
+               # evaluate variables. we can use eval because we most likely just used "$var"
+               set value (eval echo $value)
 
-            set -xg $var $value
-        end
-     ```
+               set -xg $var $value
+         end
+      ```
 
    - **Visual Studio Code Settings.json**
-    ```json
-    {
-    "telemetry.telemetryLevel": "off",
-    "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, JetBrainsMono Nerd Font",
-    "bracket-pair-colorizer-2.depreciation-notice": false,
-    "terminal.integrated.profiles.osx": {
-        "bash": {
-        "path": "bash",
-        "args": [
-            "-l"
-        ],
-        "icon": "terminal-bash"
-        },
-        "zsh": {
-        "path": "zsh",
-        "args": [
-            "-l"
-        ]
-        },
-        "fish": {
-        "path": "fish",
-        "args": [
-            "-l"
-        ]
-        },
-        "tmux": {
-        "path": "tmux",
-        "icon": "terminal-tmux"
-        },
-        "pwsh": {
-        "path": "pwsh",
-        "icon": "terminal-powershell"
-        },
-        "fishlogin": {
-        "path": "/usr/local/bin/fishlogin"
-        }
-    },
-    "terminal.integrated.defaultProfile.osx": "fishlogin",
-    "explorer.confirmDelete": false,
-    "terminal.integrated.automationProfile.linux": {}
-    }
-    ```
+      ```json
+      {
+      "telemetry.telemetryLevel": "off",
+      "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace, JetBrainsMono Nerd Font",
+      "bracket-pair-colorizer-2.depreciation-notice": false,
+      "terminal.integrated.profiles.osx": {
+         "bash": {
+         "path": "bash",
+         "args": [
+               "-l"
+         ],
+         "icon": "terminal-bash"
+         },
+         "zsh": {
+         "path": "zsh",
+         "args": [
+               "-l"
+         ]
+         },
+         "fish": {
+         "path": "fish",
+         "args": [
+               "-l"
+         ]
+         },
+         "tmux": {
+         "path": "tmux",
+         "icon": "terminal-tmux"
+         },
+         "pwsh": {
+         "path": "pwsh",
+         "icon": "terminal-powershell"
+         },
+         "fishlogin": {
+         "path": "/usr/local/bin/fishlogin"
+         }
+      },
+      "terminal.integrated.defaultProfile.osx": "fishlogin",
+      "explorer.confirmDelete": false,
+      "terminal.integrated.automationProfile.linux": {}
+      }
+      ```
