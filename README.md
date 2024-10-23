@@ -86,17 +86,102 @@ Once the above steps are complete, you should be able to open Windows Terminal, 
      ```
      Create file `~/.config/starship.toml` and copy the following:
      ```toml
-     # ~/.config/starship.toml
+      # ~/.config/starship.toml
 
-     add_newline = true
-     format = "[$env_var]$all"
-     
-     [character]
-     success_symbol = "✔️ "
-     error_symbol = "✖️ "
+      # Inserts a blank line between shell prompts
+      add_newline = true
 
-     [git_branch]
-     symbol = " "
+      # Change the default prompt format
+      # format = """\
+      # [╭╴](238)$env_var\
+      # $all[╰─](238)$character"""
+
+      # Change the default prompt characters
+      [character]
+      success_symbol = ""
+      error_symbol = ""
+
+      # Shows an icon that should be included by zshrc script based on the distribution or os
+      [env_var.STARSHIP_DISTRO]
+      format = '[$env_value](bold white)'  # removed space between distro and rest for pwsh
+      variable = "STARSHIP_DISTRO"
+      disabled = false
+
+      # Shows the username
+      [username]
+      style_user = "white bold"
+      style_root = "black bold"
+      format = "[$user]($style) "
+      disabled = false  # disable in powershell
+      show_always = true
+
+      [directory]
+      truncation_length = 3
+      truncation_symbol = "…/"
+      home_symbol = " ~"
+      read_only_style = "197"
+      read_only = "  "
+      format = "at [$path]($style)[$read_only]($read_only_style) "
+
+      [git_branch]
+      symbol = "󰊢 "
+      format = "on [$symbol$branch]($style) "
+      truncation_length = 20
+      truncation_symbol = "…/"
+      style = "bold green"
+
+      [git_status]
+      format = '[\($all_status$ahead_behind\)]($style) '
+      style = "bold green"
+      conflicted = "🏳"
+      up_to_date = " "
+      untracked = " "
+      ahead = "⇡${count}"
+      diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+      behind = "⇣${count}"
+      stashed = " "
+      modified = " "
+      staged = '[++\($count\)](green)'
+      renamed = "󰖷 "
+      deleted = " "
+
+      [terraform]
+      format = "via [󱁢 terraform $version]($style) 󰑃 [$workspace]($style) "
+
+      [vagrant]
+      format = "via [ vagrant $version]($style) "
+
+      [docker_context]
+      format = "via [ $context](bold blue) "
+
+      [helm]
+      format = "via [󱃾 $version](bold purple) "
+
+      [python]
+      symbol = " "
+      python_binary = "python3"
+
+      [nodejs]
+      format = "via [󰎙 $version](bold green) "
+      disabled = true
+
+      [ruby]
+      format = "via [ $version]($style) "
+
+      [kubernetes]
+      format = 'on [󱃾 $context\($namespace\)](bold purple) '
+      disabled = false
+      [kubernetes.context_aliases]
+      ".*:.*:cluster.(?P<var_cluster>[\\w-]+)" = "$var_cluster"
+
+      [gcloud]
+      disabled = true
+
+      [aws]
+      format = 'on [$symbol$profile]($style) '
+      style = "bold yellow"
+      symbol = "☁️" 
+      force_display = true
      ```
 
    - **Fish Shell (optional, mainly for Linux)**  
